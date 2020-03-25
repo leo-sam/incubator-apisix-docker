@@ -30,7 +30,7 @@ services:
       - apisix
 
   web1:
-    image: https://8igof9xw.mirror.aliyuncs.com/ruby:2-alpine
+    image: ruby:2-alpine
     command: sh -c "mkdir -p /tmp/www && echo 'web1' > /tmp/www/web1.txt && ruby -run -ehttpd /tmp/www -p8000"
     restart: always
     ports:
@@ -39,7 +39,7 @@ services:
       - apisix
 
   web2:
-    image: https://8igof9xw.mirror.aliyuncs.com/ruby:2-alpine
+    image: ruby:2-alpine
     command: sh -c "mkdir -p /tmp/www && echo 'web2' > /tmp/www/web2.txt && ruby -run -ehttpd /tmp/www -p8000"
     restart: always
     ports:
