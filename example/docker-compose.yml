@@ -2,9 +2,10 @@ version: "3"
 
 services:
   apisix:
-    build:
-      context: ./..
-      dockerfile: alpine/Dockerfile
+    # build:
+    #   context: ./..
+    #   dockerfile: alpine/Dockerfile
+    image: registry.cn-hangzhou.aliyuncs.com/leo-sam/apisix:master-alpine
     restart: always
     volumes:
       - ./apisix_log:/usr/local/apisix/logs
@@ -15,8 +16,8 @@ services:
 
   etcd:
     # if you are in the mainland China, please use Azure China mirror:
-    # image: gcr.azk8s.cn/etcd-development/etcd:v3.3.12
-    image: gcr.io/etcd-development/etcd:v3.3.12
+    image: gcr.azk8s.cn/etcd-development/etcd:v3.3.12
+    # image: gcr.io/etcd-development/etcd:v3.3.12
     command: /usr/local/bin/etcd --advertise-client-urls http://0.0.0.0:2379 --listen-client-urls http://0.0.0.0:2379
     restart: always
     volumes:
