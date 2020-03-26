@@ -1,7 +1,12 @@
  FROM openresty/openresty:alpine-fat
 
+# 修改为master分支
 ARG APISIX_VERSION=master
 LABEL apisix_version="${APISIX_VERSION}"
+#添加国内镜像
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+ADD ./rockspec /app/rockspec
 
 RUN apk add --no-cache --virtual .builddeps \
     automake \
@@ -10,7 +15,7 @@ RUN apk add --no-cache --virtual .builddeps \
     pkgconfig \
     cmake \
     git \
-    && luarocks install https://github.com/apache/incubator-apisix/raw/master/rockspec/apisix-${APISIX_VERSION}-0.rockspec --tree=/usr/local/apisix/deps \
+    && luarocks install /app/rockspec/apisix-${APISIX_VERSION}-0.rockspec --tree=/usr/local/apisix/deps \
     && cp /usr/local/apisix/deps/lib/luarocks/rocks-5.1/apisix/${APISIX_VERSION}-0/bin/apisix /usr/bin/ \
     && bin='#! /usr/local/openresty/luajit/bin/luajit\npackage.path = "/usr/local/apisix/lua/?.lua;" .. package.path' \
     && sed -i "1s@.*@$bin@" /usr/bin/apisix \
