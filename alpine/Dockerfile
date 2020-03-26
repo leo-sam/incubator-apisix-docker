@@ -1,6 +1,6 @@
  FROM openresty/openresty:alpine-fat
 
-ARG APISIX_VERSION=1.1
+ARG APISIX_VERSION=master
 LABEL apisix_version="${APISIX_VERSION}"
 
 RUN apk add --no-cache --virtual .builddeps \

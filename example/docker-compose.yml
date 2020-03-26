@@ -2,10 +2,10 @@ version: "3"
 
 services:
   apisix:
-    # build:
-    #   context: ./..
-    #   dockerfile: alpine/Dockerfile
-    image: registry.cn-hangzhou.aliyuncs.com/leo-sam/apisix:master-alpine
+    build:
+      context: ./..
+      dockerfile: alpine/Dockerfile
+    # image: registry.cn-hangzhou.aliyuncs.com/leo-sam/apisix:master-alpine
     restart: always
     volumes:
       - ./apisix_log:/usr/local/apisix/logs
